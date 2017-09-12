@@ -34,7 +34,7 @@ public class Dot : MonoBehaviour {
 
     void UpdateIndicators()
     {
-        coordinatesText.text = "(" + transform.position.x + "," + transform.position.y + "," + transform.position.z + ")";
+        coordinatesText.text = "(" + (Mathf.Round(transform.position.x * 10f) / 10f) + "," + (Mathf.Round(transform.position.y * 10f) / 10f) + "," + (Mathf.Round(transform.position.z * 10f) / 10f) + ")";
         if (currentCluster != null)
             clusterText.text = "[" + currentCluster.GetID() + "]";
     }
@@ -47,6 +47,7 @@ public class Dot : MonoBehaviour {
     public void SetPosition(Vector3 val)
     {
         transform.position = val;
+        UpdateIndicators();
     }
 
     public float GetX()
@@ -67,16 +68,19 @@ public class Dot : MonoBehaviour {
     public void SetX(float val)
     {
         transform.position = new Vector3(val, transform.position.y, transform.position.z);
+        UpdateIndicators();
     }
 
     public void SetY(float val)
     {
         transform.position = new Vector3(transform.position.x, val, transform.position.z);
+        UpdateIndicators();
     }
 
     public void SetZ(float val)
     {
         transform.position = new Vector3(transform.position.x, transform.position.y, val);
+        UpdateIndicators();
     }
 
 }

@@ -18,7 +18,7 @@ public class Dot : MonoBehaviour {
     public void SetCluster(Cluster val)
     {
         currentCluster = val;
-        glowSprite.color = currentCluster.GetColor();
+        glowSprite.color = currentCluster.Color;
         UpdateIndicators();
     }
 
@@ -36,51 +36,47 @@ public class Dot : MonoBehaviour {
     {
         coordinatesText.text = "(" + (Mathf.Round(transform.position.x * 10f) / 10f) + "," + (Mathf.Round(transform.position.y * 10f) / 10f) + "," + (Mathf.Round(transform.position.z * 10f) / 10f) + ")";
         if (currentCluster != null)
-            clusterText.text = "[" + currentCluster.GetID() + "]";
+            clusterText.text = "[" + currentCluster.Id + "]";
     }
 
-    public Vector3 GetPosition()
+    public Vector3 Position
     {
-        return transform.position;
+        get { return transform.position; }
+        set 
+        { 
+            transform.position = value;
+            UpdateIndicators();
+        }
     }
 
-    public void SetPosition(Vector3 val)
+    public float X
     {
-        transform.position = val;
-        UpdateIndicators();
+        get { return transform.position.x; }
+        set
+        {
+            transform.position = new Vector3(value, transform.position.y, transform.position.z);
+            UpdateIndicators();
+        }
     }
 
-    public float GetX()
+    public float Y
     {
-        return transform.position.x;
+        get { return transform.position.y; }
+        set
+        {
+            transform.position = new Vector3(transform.position.x, value, transform.position.z);
+            UpdateIndicators();
+        }
     }
 
-    public float GetY()
+    public float Z
     {
-        return transform.position.y;
-    }
-
-    public float GetZ()
-    {
-        return transform.position.z;
-    }
-
-    public void SetX(float val)
-    {
-        transform.position = new Vector3(val, transform.position.y, transform.position.z);
-        UpdateIndicators();
-    }
-
-    public void SetY(float val)
-    {
-        transform.position = new Vector3(transform.position.x, val, transform.position.z);
-        UpdateIndicators();
-    }
-
-    public void SetZ(float val)
-    {
-        transform.position = new Vector3(transform.position.x, transform.position.y, val);
-        UpdateIndicators();
+        get { return transform.position.z; }
+        set
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, value);
+            UpdateIndicators();
+        }
     }
 
 }

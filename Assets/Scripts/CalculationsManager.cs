@@ -27,7 +27,7 @@ public class CalculationsManager : MonoBehaviour {
         threshold = t;
     }
 
-    public void Clasterise(DistanceAction FindDistance)
+    public void Clusterize(DistanceAction FindDistance)
     {
         if (clusters != null)
             clusters.Clear();
@@ -45,12 +45,10 @@ public class CalculationsManager : MonoBehaviour {
             List<float> nearestClustersDistances = new List<float>();
             while (j < clusters.Count) //check each existing cluster
             {
-                //float distance = Calculator.EuclidDistance(dots[i].GetPosition(), clusters[j].GetCenter());
-                float distance = FindDistance(dots[i].GetPosition(), clusters[j].GetCenter());
+                float distance = FindDistance(dots[i].Position, clusters[j].Center);
                 if (distance < threshold)
                 { //if the distance is small enough, add the cluster to the list of nearest clusters
                     Debug.Log("Dot " + i + " is close to the cluster " + j );
-                    //clusters[j].AddDot(dots[i]);
                     nearestClusters.Add(clusters[j]);
                     nearestClustersDistances.Add(distance);
                 }
@@ -73,19 +71,18 @@ public class CalculationsManager : MonoBehaviour {
     public void EuclidDistance()
     {
         Calculator.SetWeights(1, 1, 1);
-        Clasterise(Calculator.EuclidDistance);
+        Clusterize(Calculator.EuclidDistance);
     }
 
     public void EuclidDistanceWeighted()
     {
         Calculator.SetWeights(weightX, weightY, weightZ);
-        Clasterise(Calculator.EuclidDistance);
+        Clusterize(Calculator.EuclidDistance);
     }
 
     public void CanberraDistance()
     {
-        Clasterise(Calculator.CanberraDistance);
-        //Clasterise(dots[0].TestMethod);
+        Clusterize(Calculator.CanberraDistance);
     }
 
     public void Normalize()

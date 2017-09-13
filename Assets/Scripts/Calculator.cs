@@ -8,12 +8,6 @@ public class Calculator  {
     static float coefY = 1.0f; 
     static float coefZ = 1.0f;
 
-    public static void Boo()
-    {
-        Debug.Log("Boo");
-    }
-
-    //public static float EuclidDistance (Vector3 l, Vector3 p, float coefX = 1.0f, float coefY = 1.0f, float coefZ = 1.0f)
     public static float EuclidDistance (Vector3 l, Vector3 p)
     {
         float result = Mathf.Sqrt( (coefX*(l.x - p.x) * (l.x - p.x)) + (coefY*(l.y - p.y) * (l.y - p.y)) + (coefZ*(l.z - p.z) * (l.z - p.z)));
@@ -50,7 +44,7 @@ public class Calculator  {
 
     public static Vector3 AveragePoint(Cluster cluster)
     {
-        return AveragePoint(cluster.GetDotList());
+        return AveragePoint(cluster.Dots);
     }
 
     public static Vector3 AveragePoint (List<Dot> dotList)
@@ -58,7 +52,7 @@ public class Calculator  {
         List<Vector3> coordinates = new List<Vector3>();
         foreach (Dot aDot in dotList)
         {
-            coordinates.Add(aDot.GetPosition());
+            coordinates.Add(aDot.Position);
         }
         return AveragePoint(coordinates);
     }
@@ -82,27 +76,25 @@ public class Calculator  {
         for (int i = 0; i < dots.Count; i++)
         {
             Dot cur = dots[i];
-            if (cur.GetPosition().x > maxX)
-                maxX = cur.GetPosition().x;
-            if (cur.GetPosition().x < minX)
-                minX = cur.GetPosition().x;
-            if (cur.GetPosition().y > maxY)
-                maxY = cur.GetPosition().y;
-            if (cur.GetPosition().y < minY)
-                minY = cur.GetPosition().y;
-            if (cur.GetPosition().z > maxZ)
-                maxZ = cur.GetPosition().z;
-            if (cur.GetPosition().z < minZ)
-                minZ = cur.GetPosition().z;
+            if (cur.Position.x > maxX)
+                maxX = cur.Position.x;
+            if (cur.Position.x < minX)
+                minX = cur.Position.x;
+            if (cur.Position.y > maxY)
+                maxY = cur.Position.y;
+            if (cur.Position.y < minY)
+                minY = cur.Position.y;
+            if (cur.Position.z > maxZ)
+                maxZ = cur.Position.z;
+            if (cur.Position.z < minZ)
+                minZ = cur.Position.z;
         }
-        //Debug.Log();
         for (int i = 0; i < dots.Count; i++)
         {
             Dot cur = dots[i];
-            Debug.Log("curx " + cur.GetX() + " maxx " + maxX + " minx " + minX);
-            cur.SetX( 10 * (cur.GetX() - minX) / (maxX - minX) );
-            cur.SetY( 10 * (cur.GetY() - minY) / (maxY - minY) );
-            cur.SetZ( 10 * (cur.GetZ() - minZ) / (maxZ - minZ) );
+            cur.X = ( 10 * (cur.X - minX) / (maxX - minX) );
+            cur.Y = ( 10 * (cur.Y - minY) / (maxY - minY) );
+            cur.Z = ( 10 * (cur.Z - minZ) / (maxZ - minZ) );
         }
 
     }

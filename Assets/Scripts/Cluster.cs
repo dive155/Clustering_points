@@ -19,35 +19,30 @@ public class Cluster  {
     public void AddDot(Dot dot)
     {
         dot.SetCluster(this);
-        //dot.SetColor(color);
         dots.Add(dot);
-        //Debug.Log("Dot color " + color);
         center = Calculator.AveragePoint(dots);
     }
 
-    public List<Dot> GetDotList()
+    public List<Dot> Dots
     {
-        return dots;
+        get { return dots; }
     }
 
-    public Vector3 GetCenter()
+    public Vector3 Center
     {
-        return center;
+        get {return center;}
+    }
+        
+
+    public Color Color
+    {
+        get { return color; }
     }
 
-    public Color GetColor()
+    public int Id
     {
-        return color;
-    }
-
-    public int GetID()
-    {
-        return id;
-    }
-
-    public void SetID(int val)
-    {
-        id = val;
+        get { return id; }
+        set { id = value; }
     }
 
 }

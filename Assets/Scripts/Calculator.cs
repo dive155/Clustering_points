@@ -113,6 +113,4 @@ public class Calculator  {
         }
         return minID;
     }
-        
-
 }

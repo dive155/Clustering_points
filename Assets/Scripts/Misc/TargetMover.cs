@@ -31,5 +31,13 @@ public class TargetMover : MonoBehaviour {
         {
             transform.Translate(Quaternion.LookRotation(Camera.main.transform.forward) * new Vector3(0,-speed,0));
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            speed = 0.5f;
+        }
+        if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            speed = 0.1f;
+        }
 	}
 }
